@@ -31,4 +31,9 @@ export async function getTicker(symbol: string): Promise<BingXTicker | null> {
   return tickers.find((t) => t.symbol === symbol) ?? null
 }
 
-export const SUPPORTED_SYMBOLS = ["ETH-USDC", "ETH-USDT"] as const
+export const SUPPORTED_SYMBOLS = ["ETH-USDC", "ETH-USDT", "LINK-USDT", "UNI-USDT", "AAVE-USDT", "CRV-USDT"] as const
+
+export async function isBingxListed(symbol: string): Promise<boolean> {
+  const tickers = await getAllTickers()
+  return tickers.some((t) => t.symbol === symbol)
+}

@@ -6,7 +6,7 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/com
 import { Badge } from "@/components/ui/badge"
 import { Skeleton } from "@/components/ui/skeleton"
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip"
-import { Activity, Brain, Link2, TrendingUp, TrendingDown, Zap, ExternalLink, Clock } from "lucide-react"
+import { Activity, Brain, Link2, TrendingUp, TrendingDown, Zap, ExternalLink, Clock, AlertTriangle, Search } from "lucide-react"
 import { SUPPORTED_SYMBOLS } from "@/lib/bingx"
 import { SAMPLE_ATTESTATIONS } from "@/lib/basedex"
 import type { PriceGapResult } from "@/lib/arbiter"
@@ -50,6 +50,12 @@ export function Dashboard() {
   const [scanResult, setScanResult] = useState<ScanResult | null>(null)
   const [scanError, setScanError] = useState<string>("")
 
+  const [customToken0, setCustomToken0] = useState("")
+  const [customToken1, setCustomToken1] = useState("")
+  const [customPool, setCustomPool] = useState("")
+  const [customLabel, setCustomLabel] = useState("")
+  const [showCustom, setShowCustom] = useState(false)
+
   const [analyzeState, setAnalyzeState] = useState<AnalyzeState>("idle")
   const [analysis, setAnalysis] = useState<AnalysisResult | null>(null)
   const [analyzeError, setAnalyzeError] = useState<string>("")
@@ -69,7 +75,19 @@ export function Dashboard() {
     setScanError("")
 
     try {
-      const res = await fetch(`/api/scan?symbol=${selectedSymbol}`)
+      let url: string
+      if (showCustom && customToken0 && customToken1) {
+        const params = new URLSearchParams({
+          token0: customToken0,
+          token1: customToken1,
+        })
+        if (customLabel) params.set("label", customLabel)
+        if (customPool) params.set("pool", customPool)
+        url = `/api/scan?${params}`
+      } else {
+        url = `/api/scan?symbol=${selectedSymbol}`
+      }
+      const res = await fetch(url)
       if (!res.ok) {
         const data = await res.json()
         throw new Error(data.error || "Scan failed")
@@ -81,7 +99,7 @@ export function Dashboard() {
       setScanError(err instanceof Error ? err.message : "Failed to fetch prices")
       setScanState("error")
     }
-  }, [selectedSymbol])
+  }, [selectedSymbol, showCustom, customToken0, customToken1, customLabel, customPool])
 
   const handleAnalyze = useCallback(async () => {
     if (!scanResult) return
@@ -182,7 +200,8 @@ export function Dashboard() {
               <select
                 value={selectedSymbol}
                 onChange={(e) => setSelectedSymbol(e.target.value)}
-                className="flex h-10 w-full sm:w-48 rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                disabled={showCustom}
+                className="flex h-10 w-full sm:w-48 rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring disabled:opacity-50"
               >
                 {SUPPORTED_SYMBOLS.map((sym) => (
                   <option key={sym} value={sym}>
@@ -203,7 +222,65 @@ export function Dashboard() {
                   </>
                 )}
               </Button>
+              <Button
+                variant="outline"
+                onClick={() => setShowCustom(!showCustom)}
+                className="flex-1 sm:flex-none"
+              >
+                <Search className="mr-2 h-4 w-4" />
+                {showCustom ? "Use Presets" : "Custom Token"}
+              </Button>
             </div>
+
+            {showCustom && (
+              <div className="rounded-lg border border-border bg-card p-4 space-y-3">
+                <p className="text-xs text-muted-foreground">
+                  Enter any two ERC-20 token addresses on Base. Optionally provide a Uniswap V3 pool address — if omitted, the scanner tries to discover one automatically.
+                </p>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  <div>
+                    <label className="text-xs font-medium text-muted-foreground mb-1 block">Token 0 Address</label>
+                    <input
+                      type="text"
+                      value={customToken0}
+                      onChange={(e) => setCustomToken0(e.target.value)}
+                      placeholder="0x..."
+                      className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm font-mono ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                    />
+                  </div>
+                  <div>
+                    <label className="text-xs font-medium text-muted-foreground mb-1 block">Token 1 Address</label>
+                    <input
+                      type="text"
+                      value={customToken1}
+                      onChange={(e) => setCustomToken1(e.target.value)}
+                      placeholder="0x..."
+                      className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm font-mono ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                    />
+                  </div>
+                </div>
+                <div>
+                  <label className="text-xs font-medium text-muted-foreground mb-1 block">Label (optional)</label>
+                  <input
+                    type="text"
+                    value={customLabel}
+                    onChange={(e) => setCustomLabel(e.target.value)}
+                    placeholder="e.g. MYTOKEN-USDC"
+                    className="flex h-10 w-full sm:w-64 rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                  />
+                </div>
+                <div>
+                  <label className="text-xs font-medium text-muted-foreground mb-1 block">Pool Address (optional — improves reliability)</label>
+                  <input
+                    type="text"
+                    value={customPool}
+                    onChange={(e) => setCustomPool(e.target.value)}
+                    placeholder="0x... (Uniswap V3 pool on Base)"
+                    className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm font-mono ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                  />
+                </div>
+              </div>
+            )}
 
             {scanState === "loading" && (
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -230,14 +307,28 @@ export function Dashboard() {
 
             {scanState === "success" && scanResult && (
               <div className="space-y-4">
+                {!scanResult.cexSupported && (
+                  <div className="flex items-start gap-2 rounded-lg border border-yellow-500/30 bg-yellow-500/5 p-3">
+                    <AlertTriangle className="h-4 w-4 text-yellow-500 mt-0.5 shrink-0" />
+                    <div>
+                      <p className="text-sm font-medium text-yellow-500">Not listed on BingX</p>
+                      <p className="text-xs text-muted-foreground mt-0.5">
+                        This token pair is not available on BingX CEX. Showing DEX price only — no CEX-DEX arbitrage gap available.
+                      </p>
+                    </div>
+                  </div>
+                )}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <Card className="border-border">
                     <CardContent className="pt-4">
                       <div className="flex items-center gap-2 mb-1">
                         <Badge variant="secondary" className="text-xs">BingX (CEX)</Badge>
+                        {!scanResult.cexSupported && (
+                          <Badge variant="outline" className="text-xs text-muted-foreground">N/A</Badge>
+                        )}
                       </div>
                       <p className="text-2xl font-bold tabular-nums">
-                        {formatPrice(scanResult.bingxPrice)}
+                        {scanResult.cexSupported ? formatPrice(scanResult.bingxPrice) : "—"}
                       </p>
                       <p className="text-xs text-muted-foreground mt-1">{scanResult.symbol}</p>
                     </CardContent>
@@ -257,40 +348,42 @@ export function Dashboard() {
                   </Card>
                 </div>
 
-                <div className="flex items-center justify-between rounded-lg border border-border bg-card p-4">
-                  <div className="flex items-center gap-3">
-                    {scanResult.direction === "CEX_LOWER" ? (
-                      <TrendingDown className="h-5 w-5 text-primary" />
-                    ) : (
-                      <TrendingUp className="h-5 w-5 text-primary" />
-                    )}
-                    <div>
+                {scanResult.cexSupported && (
+                  <div className="flex items-center justify-between rounded-lg border border-border bg-card p-4">
+                    <div className="flex items-center gap-3">
+                      {scanResult.direction === "CEX_LOWER" ? (
+                        <TrendingDown className="h-5 w-5 text-primary" />
+                      ) : (
+                        <TrendingUp className="h-5 w-5 text-primary" />
+                      )}
+                      <div>
+                        <p className="text-sm font-medium">
+                          Gap: <span className="text-primary">{scanResult.gapPercent.toFixed(3)}%</span>
+                        </p>
+                        <p className="text-xs text-muted-foreground">
+                          {scanResult.direction === "CEX_LOWER"
+                            ? "BingX cheaper → buy CEX, sell DEX"
+                            : "DEX cheaper → buy DEX, sell CEX"}
+                        </p>
+                      </div>
+                    </div>
+                    <div className="text-right">
                       <p className="text-sm font-medium">
-                        Gap: <span className="text-primary">{scanResult.gapPercent.toFixed(3)}%</span>
+                        Net: <span className={scanResult.netProfit > 0 ? "text-primary" : "text-destructive"}>
+                          ${scanResult.netProfit.toFixed(4)}
+                        </span>
                       </p>
-                      <p className="text-xs text-muted-foreground">
-                        {scanResult.direction === "CEX_LOWER"
-                          ? "BingX cheaper → buy CEX, sell DEX"
-                          : "DEX cheaper → buy DEX, sell CEX"}
-                      </p>
+                      <Tooltip>
+                        <TooltipTrigger asChild>
+                          <p className="text-xs text-muted-foreground cursor-help">on $1,000 trade</p>
+                        </TooltipTrigger>
+                        <TooltipContent>
+                          <p>After Base gas (~$0.01) + 30bps slippage</p>
+                        </TooltipContent>
+                      </Tooltip>
                     </div>
                   </div>
-                  <div className="text-right">
-                    <p className="text-sm font-medium">
-                      Net: <span className={scanResult.netProfit > 0 ? "text-primary" : "text-destructive"}>
-                        ${scanResult.netProfit.toFixed(4)}
-                      </span>
-                    </p>
-                    <Tooltip>
-                      <TooltipTrigger asChild>
-                        <p className="text-xs text-muted-foreground cursor-help">on $1,000 trade</p>
-                      </TooltipTrigger>
-                      <TooltipContent>
-                        <p>After Base gas (~$0.01) + 30bps slippage</p>
-                      </TooltipContent>
-                    </Tooltip>
-                  </div>
-                </div>
+                )}
 
                 <div className="flex flex-col sm:flex-row gap-3">
                   <Button
