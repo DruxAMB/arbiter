@@ -4,7 +4,10 @@ import { base } from "viem/chains"
 import { privateKeyToAccount } from "viem/accounts"
 import type { PriceGapResult } from "@/lib/arbiter"
 
-const ARBITER_CONTRACT = "0x0000000000000000000000000000000000000000" as const
+export const runtime = "nodejs"
+export const maxDuration = 30
+
+const ARBITER_CONTRACT = "0x52335A48448F90Dc7656F3378CBEad20CB6070C2" as const
 
 const CONTRACT_ABI = [
   {
@@ -34,8 +37,9 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: "Missing scan result" }, { status: 400 })
     }
 
-    const privateKey = process.env.ATTESTER_PRIVATE_KEY
-    if (!privateKey || ARBITER_CONTRACT === "0x0000000000000000000000000000000000000000") {
+    const rawKey = process.env.ATTESTER_PRIVATE_KEY?.trim()
+    const privateKey = rawKey?.startsWith("0x") ? rawKey : `0x${rawKey}`
+    if (!rawKey) {
       const mockHash = "0x" + Array.from({ length: 64 }, () =>
         Math.floor(Math.random() * 16).toString(16)
       ).join("")
@@ -43,7 +47,7 @@ export async function POST(request: Request) {
         txHash: mockHash,
         explorerUrl: `https://basescan.org/tx/${mockHash}`,
         simulated: true,
-        message: "Attestation recorded (simulated — contract not yet deployed)",
+        message: "Attestation recorded (simulated — ATTESTER_PRIVATE_KEY not configured)",
       })
     }
 
@@ -73,8 +77,9 @@ export async function POST(request: Request) {
     })
   } catch (error) {
     console.error("Attestation error:", error)
+    const message = error instanceof Error ? error.message : String(error)
     return NextResponse.json(
-      { error: "On-chain attestation failed — please retry" },
+      { error: "On-chain attestation failed", detail: message },
       { status: 500 }
     )
   }

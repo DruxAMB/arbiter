@@ -3,6 +3,9 @@ import { scanPair, scanAllPairs } from "@/lib/arbiter"
 import { SUPPORTED_SYMBOLS, getTicker } from "@/lib/bingx"
 import { getDexPrice } from "@/lib/basedex"
 
+export const runtime = "nodejs"
+export const maxDuration = 30
+
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url)
   const symbol = searchParams.get("symbol")
