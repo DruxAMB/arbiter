@@ -182,7 +182,7 @@ export function Dashboard() {
                 onChange={(e) => setSelectedSymbol(e.target.value)}
                 disabled={showCustom}
                 aria-label="Select token pair"
-                className="flex h-12 w-full sm:w-48 rounded-full border border-input bg-background px-4 py-2 text-base ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring disabled:opacity-50"
+                className="flex h-12 w-full sm:w-48 rounded-sm border border-input bg-background px-4 py-2 text-base ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring disabled:opacity-50"
               >
                 {SUPPORTED_SYMBOLS.map((sym) => (
                   <option key={sym} value={sym}>
@@ -190,7 +190,7 @@ export function Dashboard() {
                   </option>
                 ))}
               </select>
-              <Button type="submit" disabled={scanState === "loading"} className="flex-1 sm:flex-none h-12 rounded-full">
+              <Button type="submit" disabled={scanState === "loading"} className="flex-1 sm:flex-none h-12 rounded-sm">
                 {scanState === "loading" ? (
                   <>
                     <Activity className="mr-2 h-4 w-4 animate-pulse" />
@@ -207,7 +207,7 @@ export function Dashboard() {
                 type="button"
                 variant="outline"
                 onClick={() => setShowCustom(!showCustom)}
-                className="flex-1 sm:flex-none h-12 rounded-full"
+                className="flex-1 sm:flex-none h-12 rounded-sm"
               >
                 <Search className="mr-2 h-4 w-4" />
                 {showCustom ? "Use Presets" : "Custom Token"}
@@ -215,7 +215,7 @@ export function Dashboard() {
             </form>
 
             {showCustom && (
-              <div className="rounded-full border border-border bg-card p-4 space-y-3">
+              <div className="rounded-lg border border-border bg-card p-4 space-y-3">
                 <p className="text-xs text-muted-foreground">
                   Enter any two ERC-20 token addresses on Base. Optionally provide a Uniswap V3 pool address — if omitted, the scanner tries to discover one automatically.
                 </p>
@@ -239,7 +239,7 @@ export function Dashboard() {
                       value={customToken1}
                       onChange={(e) => setCustomToken1(e.target.value)}
                       placeholder="0x..."
-                      className="flex h-12 w-full rounded-full border border-input bg-background px-4 py-2 text-base font-mono ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                      className="flex h-12 w-full rounded-sm border border-input bg-background px-4 py-2 text-base font-mono ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
                     />
                   </div>
                 </div>
@@ -251,7 +251,7 @@ export function Dashboard() {
                     value={customLabel}
                     onChange={(e) => setCustomLabel(e.target.value)}
                     placeholder="e.g. MYTOKEN-USDC"
-                    className="flex h-12 w-full sm:w-64 rounded-full border border-input bg-background px-4 py-2 text-base ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                    className="flex h-12 w-full sm:w-64 rounded-sm border border-input bg-background px-4 py-2 text-base ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
                   />
                 </div>
                 <div>
@@ -262,7 +262,7 @@ export function Dashboard() {
                     value={customPool}
                     onChange={(e) => setCustomPool(e.target.value)}
                     placeholder="0x... (Uniswap V3 pool on Base)"
-                    className="flex h-12 w-full rounded-full border border-input bg-background px-4 py-2 text-base font-mono ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                    className="flex h-12 w-full rounded-sm border border-input bg-background px-4 py-2 text-base font-mono ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
                   />
                 </div>
               </div>
@@ -283,7 +283,7 @@ export function Dashboard() {
             )}
 
             {scanState === "error" && (
-              <div className="rounded-full border border-destructive/30 bg-destructive/5 p-4">
+              <div className="rounded-lg border border-destructive/30 bg-destructive/5 p-4">
                 <p className="text-sm text-destructive">{scanError}</p>
                 <Button variant="outline" size="sm" className="mt-2" onClick={handleScan}>
                   Retry scan
@@ -294,7 +294,7 @@ export function Dashboard() {
             {scanState === "success" && scanResult && (
               <div className="space-y-4">
                 {!scanResult.cexSupported && (
-                  <div className="flex items-start gap-2 rounded-full border border-warning/30 bg-warning/5 p-4">
+                  <div className="flex items-start gap-2 rounded-lg border border-warning/30 bg-warning/5 p-4">
                     <AlertTriangle className="h-4 w-4 text-warning mt-0.5 shrink-0" aria-hidden="true" />
                     <div>
                       <p className="text-sm font-medium text-warning">Not listed on BingX</p>
@@ -335,16 +335,16 @@ export function Dashboard() {
                 </div>
 
                 {scanResult.cexSupported && (
-                  <div className="flex items-center justify-between rounded-full border border-border bg-card p-4">
+                  <div className="flex items-center justify-between rounded-lg border border-border bg-card p-4">
                     <div className="flex items-center gap-3">
                       {scanResult.direction === "CEX_LOWER" ? (
-                        <TrendingDown className="h-5 w-5 text-primary" aria-hidden="true" />
+                        <TrendingDown className="h-5 w-5 text-accent" aria-hidden="true" />
                       ) : (
-                        <TrendingUp className="h-5 w-5 text-primary" aria-hidden="true" />
+                        <TrendingUp className="h-5 w-5 text-accent" aria-hidden="true" />
                       )}
                       <div>
                         <p className="text-sm font-medium">
-                          Gap: <span className="text-primary">{scanResult.gapPercent.toFixed(3)}%</span>
+                          Gap: <span className="text-accent">{scanResult.gapPercent.toFixed(3)}%</span>
                         </p>
                         <p className="text-xs text-muted-foreground">
                           {scanResult.direction === "CEX_LOWER"
@@ -376,7 +376,7 @@ export function Dashboard() {
                     onClick={handleAnalyze}
                     disabled={analyzeState === "loading" || analyzeState === "success"}
                     variant="secondary"
-                    className="flex-1 h-12 rounded-full"
+                    className="flex-1 h-12 rounded-sm"
                   >
                     {analyzeState === "loading" ? (
                       <>
@@ -393,7 +393,7 @@ export function Dashboard() {
                   <Button
                     onClick={handleAttest}
                     disabled={attestState === "loading" || attestState === "success"}
-                    className="flex-1 h-12 rounded-full"
+                    className="flex-1 h-12 rounded-sm"
                   >
                     {attestState === "loading" ? (
                       <>
@@ -430,7 +430,7 @@ export function Dashboard() {
                 </div>
               )}
               {analyzeState === "error" && (
-                <div className="rounded-full border border-destructive/30 bg-destructive/5 p-4">
+                <div className="rounded-lg border border-destructive/30 bg-destructive/5 p-4">
                   <p className="text-sm text-destructive">{analyzeError}</p>
                   <Button variant="outline" size="sm" className="mt-2" onClick={handleAnalyze}>
                     Retry analysis
@@ -471,7 +471,7 @@ export function Dashboard() {
                 </div>
               )}
               {attestState === "error" && (
-                <div className="rounded-full border border-destructive/30 bg-destructive/5 p-4">
+                <div className="rounded-lg border border-destructive/30 bg-destructive/5 p-4">
                   <p className="text-sm text-destructive">{attestError}</p>
                   <Button variant="outline" size="sm" className="mt-2" onClick={handleAttest}>
                     Retry attestation
@@ -481,7 +481,7 @@ export function Dashboard() {
               {attestState === "success" && attestResult && (
                 <div className="space-y-2">
                   <div className="flex items-center gap-2 text-sm">
-                    <span className="text-primary font-medium">Transaction confirmed</span>
+                    <span className="text-accent font-medium">Transaction confirmed</span>
                     {attestResult.simulated && (
                       <Badge variant="secondary" className="text-xs">Simulated</Badge>
                     )}
@@ -490,7 +490,7 @@ export function Dashboard() {
                     href={attestResult.explorerUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1 text-xs text-primary hover:underline"
+                    className="inline-flex items-center gap-1 text-xs text-accent hover:underline"
                   >
                     View on Basescan
                     <ExternalLink className="h-3 w-3" />
@@ -534,7 +534,7 @@ export function Dashboard() {
                         <td className="py-2 pr-4 font-medium">{record.pair}</td>
                         <td className="py-2 pr-4 tabular-nums">{formatPrice(record.bingxPrice)}</td>
                         <td className="py-2 pr-4 tabular-nums">{formatPrice(record.dexPrice)}</td>
-                        <td className="py-2 pr-4 tabular-nums text-primary">{record.gapPercent.toFixed(3)}%</td>
+                        <td className="py-2 pr-4 tabular-nums text-accent">{record.gapPercent.toFixed(3)}%</td>
                         <td className="py-2 pr-4 tabular-nums">${record.netProfit.toFixed(4)}</td>
                         <td className="py-2 pr-4 text-xs text-muted-foreground">{formatTimeAgo(record.timestamp)}</td>
                         <td className="py-2">
@@ -543,7 +543,7 @@ export function Dashboard() {
                               href={record.explorerUrl}
                               target="_blank"
                               rel="noopener noreferrer"
-                              className="inline-flex items-center gap-1 text-xs text-primary hover:underline"
+                              className="inline-flex items-center gap-1 text-xs text-accent hover:underline"
                             >
                               <ExternalLink className="h-3 w-3" />
                             </a>

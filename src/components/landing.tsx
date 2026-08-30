@@ -31,8 +31,8 @@ export function Landing({ onEnter }: LandingProps) {
       {/* Nav */}
       <nav className="relative z-10 mx-auto max-w-[1120px] px-5 py-6 flex items-center justify-between">
         <div className="flex items-center gap-2">
-          <div className="flex h-9 w-9 items-center justify-center rounded-full bg-primary/10">
-            <Zap className="h-5 w-5 text-primary" aria-hidden="true" />
+          <div className="flex h-9 w-9 items-center justify-center rounded-sm bg-accent/10">
+            <Zap className="h-5 w-5 text-accent" aria-hidden="true" />
           </div>
           <span className="text-base font-medium tracking-tight">Arbiter</span>
         </div>
@@ -50,20 +50,20 @@ export function Landing({ onEnter }: LandingProps) {
       <main className="relative z-10 mx-auto max-w-[1120px] px-5 pt-16 pb-24 sm:pt-24 sm:pb-32">
         <div className="flex flex-col items-center text-center">
           {/* Eyebrow */}
-          <span className="mb-6 inline-flex items-center gap-2 rounded-full border border-border bg-card px-4 py-1.5 text-xs font-medium uppercase tracking-[0.1em] text-muted-foreground">
+          <span className="mb-6 inline-flex items-center gap-2 rounded-sm border border-border bg-card px-4 py-1.5 text-xs font-medium uppercase tracking-[0.1em] text-muted-foreground">
             <span className="h-1.5 w-1.5 rounded-full bg-success" />
             Live on Base
           </span>
 
           {/* Headline */}
-          <h1 className="max-w-3xl text-4xl font-medium leading-[1.1] tracking-tight sm:text-5xl sm:leading-[1.05]">
+          <h1 className="max-w-3xl text-4xl font-bold leading-[1.1] tracking-tight sm:text-5xl sm:leading-[1.05]">
             Real-time CEX-DEX arbitrage
             <br />
-            <span className="text-primary">intelligence on Base</span>
+            <span className="text-accent">intelligence on Base</span>
           </h1>
 
           {/* Subhead */}
-          <p className="mt-6 max-w-xl text-base text-muted-foreground sm:text-lg">
+          <p className="mt-6 max-w-xl text-base text-muted-foreground sm:text-lg" style={{ letterSpacing: "-0.6px", lineHeight: "31px" }}>
             Detect price gaps between BingX and Uniswap V3, analyze opportunities
             with AI, and attest them on-chain. Built for traders who act in seconds.
           </p>
@@ -73,7 +73,7 @@ export function Landing({ onEnter }: LandingProps) {
             <Button
               onClick={handleEnter}
               size="lg"
-              className="h-12 rounded-full px-8 text-base"
+              className="h-12 rounded-sm px-8 text-base font-medium"
             >
               Try the demo
               <ArrowRight className="ml-2 h-4 w-4" aria-hidden="true" />
@@ -92,8 +92,8 @@ export function Landing({ onEnter }: LandingProps) {
         {/* How it works */}
         <div className="mt-20 grid grid-cols-1 gap-8 sm:mt-24 sm:grid-cols-3 sm:gap-6">
           <div className="flex flex-col items-center text-center sm:items-start sm:text-left">
-            <div className="flex h-10 w-10 items-center justify-center rounded-full bg-primary/10">
-              <Search className="h-5 w-5 text-primary" aria-hidden="true" />
+            <div className="flex h-10 w-10 items-center justify-center rounded-sm bg-accent/10">
+              <Search className="h-5 w-5 text-accent" aria-hidden="true" />
             </div>
             <h2 className="mt-4 text-sm font-medium uppercase tracking-[0.08em] text-muted-foreground">
               Step 1
@@ -105,8 +105,8 @@ export function Landing({ onEnter }: LandingProps) {
             </p>
           </div>
           <div className="flex flex-col items-center text-center sm:items-start sm:text-left">
-            <div className="flex h-10 w-10 items-center justify-center rounded-full bg-primary/10">
-              <Brain className="h-5 w-5 text-primary" aria-hidden="true" />
+            <div className="flex h-10 w-10 items-center justify-center rounded-sm bg-accent/10">
+              <Brain className="h-5 w-5 text-accent" aria-hidden="true" />
             </div>
             <h2 className="mt-4 text-sm font-medium uppercase tracking-[0.08em] text-muted-foreground">
               Step 2
@@ -118,8 +118,8 @@ export function Landing({ onEnter }: LandingProps) {
             </p>
           </div>
           <div className="flex flex-col items-center text-center sm:items-start sm:text-left">
-            <div className="flex h-10 w-10 items-center justify-center rounded-full bg-primary/10">
-              <Link2 className="h-5 w-5 text-primary" aria-hidden="true" />
+            <div className="flex h-10 w-10 items-center justify-center rounded-sm bg-accent/10">
+              <Link2 className="h-5 w-5 text-accent" aria-hidden="true" />
             </div>
             <h2 className="mt-4 text-sm font-medium uppercase tracking-[0.08em] text-muted-foreground">
               Step 3
