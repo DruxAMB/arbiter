@@ -6,7 +6,7 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/com
 import { Badge } from "@/components/ui/badge"
 import { Skeleton } from "@/components/ui/skeleton"
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip"
-import { Activity, Brain, Link2, TrendingUp, TrendingDown, Zap, ExternalLink, Clock, AlertTriangle, Search } from "lucide-react"
+import { Activity, Brain, Link2, TrendingUp, TrendingDown, ExternalLink, Clock, AlertTriangle, Search } from "lucide-react"
 import { SUPPORTED_SYMBOLS } from "@/lib/bingx"
 import { SAMPLE_ATTESTATIONS } from "@/lib/basedex"
 import type { PriceGapResult } from "@/lib/arbiter"
@@ -168,40 +168,21 @@ export function Dashboard() {
   }, [scanResult])
 
   return (
-    <div className="min-h-screen bg-background">
-      <header className="border-b border-border">
-        <div className="mx-auto max-w-5xl px-4 py-4 flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-primary/10">
-              <Zap className="h-5 w-5 text-primary" />
-            </div>
-            <div>
-              <h1 className="text-lg font-semibold tracking-tight">Arbiter</h1>
-              <p className="text-xs text-muted-foreground">CEX-DEX Arbitrage Intelligence</p>
-            </div>
-          </div>
-          <div className="flex items-center gap-2">
-            <div className="flex items-center gap-1.5 rounded-full bg-primary/10 px-3 py-1">
-              <div className="h-2 w-2 rounded-full bg-primary animate-pulse" />
-              <span className="text-xs font-medium text-primary">Live</span>
-            </div>
-          </div>
-        </div>
-      </header>
-
-      <main className="mx-auto max-w-5xl px-4 py-6 space-y-6">
+    <div className="bg-background">
+      <main className="mx-auto max-w-[1120px] px-5 py-8 space-y-6">
         <Card>
           <CardHeader>
             <CardTitle className="text-base">Scan Price Gap</CardTitle>
             <CardDescription>Select a token pair and scan for CEX-DEX arbitrage opportunities</CardDescription>
           </CardHeader>
           <CardContent className="space-y-4">
-            <div className="flex flex-col sm:flex-row gap-3">
+            <form onSubmit={(e) => { e.preventDefault(); handleScan() }} className="flex flex-col sm:flex-row gap-3">
               <select
                 value={selectedSymbol}
                 onChange={(e) => setSelectedSymbol(e.target.value)}
                 disabled={showCustom}
-                className="flex h-10 w-full sm:w-48 rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring disabled:opacity-50"
+                aria-label="Select token pair"
+                className="flex h-12 w-full sm:w-48 rounded-full border border-input bg-background px-4 py-2 text-base ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring disabled:opacity-50"
               >
                 {SUPPORTED_SYMBOLS.map((sym) => (
                   <option key={sym} value={sym}>
@@ -209,7 +190,7 @@ export function Dashboard() {
                   </option>
                 ))}
               </select>
-              <Button onClick={handleScan} disabled={scanState === "loading"} className="flex-1 sm:flex-none">
+              <Button type="submit" disabled={scanState === "loading"} className="flex-1 sm:flex-none h-12 rounded-full">
                 {scanState === "loading" ? (
                   <>
                     <Activity className="mr-2 h-4 w-4 animate-pulse" />
@@ -217,66 +198,71 @@ export function Dashboard() {
                   </>
                 ) : (
                   <>
-                    <Zap className="mr-2 h-4 w-4" />
+                    <Activity className="mr-2 h-4 w-4" />
                     Scan Now
                   </>
                 )}
               </Button>
               <Button
+                type="button"
                 variant="outline"
                 onClick={() => setShowCustom(!showCustom)}
-                className="flex-1 sm:flex-none"
+                className="flex-1 sm:flex-none h-12 rounded-full"
               >
                 <Search className="mr-2 h-4 w-4" />
                 {showCustom ? "Use Presets" : "Custom Token"}
               </Button>
-            </div>
+            </form>
 
             {showCustom && (
-              <div className="rounded-lg border border-border bg-card p-4 space-y-3">
+              <div className="rounded-full border border-border bg-card p-4 space-y-3">
                 <p className="text-xs text-muted-foreground">
                   Enter any two ERC-20 token addresses on Base. Optionally provide a Uniswap V3 pool address — if omitted, the scanner tries to discover one automatically.
                 </p>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   <div>
-                    <label className="text-xs font-medium text-muted-foreground mb-1 block">Token 0 Address</label>
+                    <label htmlFor="custom-token0" className="text-xs font-medium text-muted-foreground mb-1 block">Token 0 Address</label>
                     <input
+                      id="custom-token0"
                       type="text"
                       value={customToken0}
                       onChange={(e) => setCustomToken0(e.target.value)}
                       placeholder="0x..."
-                      className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm font-mono ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                      className="flex h-12 w-full rounded-full border border-input bg-background px-4 py-2 text-base font-mono ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
                     />
                   </div>
                   <div>
-                    <label className="text-xs font-medium text-muted-foreground mb-1 block">Token 1 Address</label>
+                    <label htmlFor="custom-token1" className="text-xs font-medium text-muted-foreground mb-1 block">Token 1 Address</label>
                     <input
+                      id="custom-token1"
                       type="text"
                       value={customToken1}
                       onChange={(e) => setCustomToken1(e.target.value)}
                       placeholder="0x..."
-                      className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm font-mono ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                      className="flex h-12 w-full rounded-full border border-input bg-background px-4 py-2 text-base font-mono ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
                     />
                   </div>
                 </div>
                 <div>
-                  <label className="text-xs font-medium text-muted-foreground mb-1 block">Label (optional)</label>
+                  <label htmlFor="custom-label" className="text-xs font-medium text-muted-foreground mb-1 block">Label (optional)</label>
                   <input
+                    id="custom-label"
                     type="text"
                     value={customLabel}
                     onChange={(e) => setCustomLabel(e.target.value)}
                     placeholder="e.g. MYTOKEN-USDC"
-                    className="flex h-10 w-full sm:w-64 rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                    className="flex h-12 w-full sm:w-64 rounded-full border border-input bg-background px-4 py-2 text-base ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
                   />
                 </div>
                 <div>
-                  <label className="text-xs font-medium text-muted-foreground mb-1 block">Pool Address (optional — improves reliability)</label>
+                  <label htmlFor="custom-pool" className="text-xs font-medium text-muted-foreground mb-1 block">Pool Address (optional — improves reliability)</label>
                   <input
+                    id="custom-pool"
                     type="text"
                     value={customPool}
                     onChange={(e) => setCustomPool(e.target.value)}
                     placeholder="0x... (Uniswap V3 pool on Base)"
-                    className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm font-mono ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                    className="flex h-12 w-full rounded-full border border-input bg-background px-4 py-2 text-base font-mono ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
                   />
                 </div>
               </div>
@@ -297,7 +283,7 @@ export function Dashboard() {
             )}
 
             {scanState === "error" && (
-              <div className="rounded-lg border border-destructive/30 bg-destructive/5 p-4">
+              <div className="rounded-full border border-destructive/30 bg-destructive/5 p-4">
                 <p className="text-sm text-destructive">{scanError}</p>
                 <Button variant="outline" size="sm" className="mt-2" onClick={handleScan}>
                   Retry scan
@@ -308,10 +294,10 @@ export function Dashboard() {
             {scanState === "success" && scanResult && (
               <div className="space-y-4">
                 {!scanResult.cexSupported && (
-                  <div className="flex items-start gap-2 rounded-lg border border-yellow-500/30 bg-yellow-500/5 p-3">
-                    <AlertTriangle className="h-4 w-4 text-yellow-500 mt-0.5 shrink-0" />
+                  <div className="flex items-start gap-2 rounded-full border border-warning/30 bg-warning/5 p-4">
+                    <AlertTriangle className="h-4 w-4 text-warning mt-0.5 shrink-0" aria-hidden="true" />
                     <div>
-                      <p className="text-sm font-medium text-yellow-500">Not listed on BingX</p>
+                      <p className="text-sm font-medium text-warning">Not listed on BingX</p>
                       <p className="text-xs text-muted-foreground mt-0.5">
                         This token pair is not available on BingX CEX. Showing DEX price only — no CEX-DEX arbitrage gap available.
                       </p>
@@ -349,12 +335,12 @@ export function Dashboard() {
                 </div>
 
                 {scanResult.cexSupported && (
-                  <div className="flex items-center justify-between rounded-lg border border-border bg-card p-4">
+                  <div className="flex items-center justify-between rounded-full border border-border bg-card p-4">
                     <div className="flex items-center gap-3">
                       {scanResult.direction === "CEX_LOWER" ? (
-                        <TrendingDown className="h-5 w-5 text-primary" />
+                        <TrendingDown className="h-5 w-5 text-primary" aria-hidden="true" />
                       ) : (
-                        <TrendingUp className="h-5 w-5 text-primary" />
+                        <TrendingUp className="h-5 w-5 text-primary" aria-hidden="true" />
                       )}
                       <div>
                         <p className="text-sm font-medium">
@@ -369,7 +355,7 @@ export function Dashboard() {
                     </div>
                     <div className="text-right">
                       <p className="text-sm font-medium">
-                        Net: <span className={scanResult.netProfit > 0 ? "text-primary" : "text-destructive"}>
+                        Net: <span className={scanResult.netProfit > 0 ? "text-success" : "text-destructive"}>
                           ${scanResult.netProfit.toFixed(4)}
                         </span>
                       </p>
@@ -388,9 +374,9 @@ export function Dashboard() {
                 <div className="flex flex-col sm:flex-row gap-3">
                   <Button
                     onClick={handleAnalyze}
-                    disabled={analyzeState === "loading"}
+                    disabled={analyzeState === "loading" || analyzeState === "success"}
                     variant="secondary"
-                    className="flex-1"
+                    className="flex-1 h-12 rounded-full"
                   >
                     {analyzeState === "loading" ? (
                       <>
@@ -399,15 +385,15 @@ export function Dashboard() {
                       </>
                     ) : (
                       <>
-                        <Brain className="mr-2 h-4 w-4" />
+                        <Brain className="mr-2 h-4 w-4" aria-hidden="true" />
                         Analyze with AI
                       </>
                     )}
                   </Button>
                   <Button
                     onClick={handleAttest}
-                    disabled={attestState === "loading"}
-                    className="flex-1"
+                    disabled={attestState === "loading" || attestState === "success"}
+                    className="flex-1 h-12 rounded-full"
                   >
                     {attestState === "loading" ? (
                       <>
@@ -416,7 +402,7 @@ export function Dashboard() {
                       </>
                     ) : (
                       <>
-                        <Link2 className="mr-2 h-4 w-4" />
+                        <Link2 className="mr-2 h-4 w-4" aria-hidden="true" />
                         Attest On-Chain
                       </>
                     )}
@@ -444,7 +430,7 @@ export function Dashboard() {
                 </div>
               )}
               {analyzeState === "error" && (
-                <div className="rounded-lg border border-destructive/30 bg-destructive/5 p-4">
+                <div className="rounded-full border border-destructive/30 bg-destructive/5 p-4">
                   <p className="text-sm text-destructive">{analyzeError}</p>
                   <Button variant="outline" size="sm" className="mt-2" onClick={handleAnalyze}>
                     Retry analysis
@@ -485,7 +471,7 @@ export function Dashboard() {
                 </div>
               )}
               {attestState === "error" && (
-                <div className="rounded-lg border border-destructive/30 bg-destructive/5 p-4">
+                <div className="rounded-full border border-destructive/30 bg-destructive/5 p-4">
                   <p className="text-sm text-destructive">{attestError}</p>
                   <Button variant="outline" size="sm" className="mt-2" onClick={handleAttest}>
                     Retry attestation
@@ -574,7 +560,7 @@ export function Dashboard() {
           </CardContent>
         </Card>
 
-        <div className="text-center text-xs text-muted-foreground py-4">
+        <div className="text-center text-xs text-muted-foreground py-8">
           <p>
             Arbiter bridges BingX and Base DEXes in real-time. Powered by Gemini AI.
           </p>

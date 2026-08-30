@@ -14,8 +14,14 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Arbiter — CEX-DEX Arbitrage Intelligence",
-  description: "AI agent detecting real-time price gaps between BingX and Base DEXes, with on-chain attestations.",
+  title: "Arbiter — CEX-DEX Arbitrage Intelligence on Base",
+  description: "AI agent detecting real-time price gaps between BingX and Base DEXes, with AI analysis and on-chain attestations.",
+  openGraph: {
+    title: "Arbiter — CEX-DEX Arbitrage Intelligence on Base",
+    description: "Detect price gaps between BingX and Uniswap V3, analyze with AI, and attest opportunities on-chain.",
+    type: "website",
+    url: "https://arbiter-sooty-six.vercel.app",
+  },
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
