@@ -42,3 +42,5 @@ next-env.d.ts
 
 # working docs (playbook files that live in workspace root)
 AGENTS.local.md
+
+.vercel
