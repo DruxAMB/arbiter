@@ -17,63 +17,75 @@ export function Landing({ onEnter }: LandingProps) {
   }
   return (
     <div className="relative min-h-[100dvh] overflow-hidden">
-      {/* Ambient glow — pointer-events: none so it never swallows clicks */}
+      {/* Ambient glow — 179deg gradient, pointer-events: none */}
       <div
         aria-hidden="true"
         className="pointer-events-none absolute inset-0 overflow-hidden"
       >
         <div
-          className="absolute left-1/2 top-0 h-[600px] w-[800px] -translate-x-1/2 rounded-full opacity-30 blur-[120px]"
+          className="absolute left-1/2 top-0 h-[700px] w-[900px] -translate-x-1/2 rounded-full opacity-25 blur-[140px]"
           style={{ background: "var(--gradient-brand)" }}
         />
       </div>
 
-      {/* Nav — floating pill */}
-      <nav className="relative z-10 mx-auto max-w-[1120px] px-5 py-6 flex items-center justify-between">
-        <div className="flex items-center gap-2">
-          <div className="flex h-9 w-9 items-center justify-center rounded-md bg-accent/10">
-            <Zap className="h-5 w-5 text-accent" aria-hidden="true" />
-          </div>
-          <span className="text-base font-medium tracking-tight">Arbiter</span>
-        </div>
-        <a
-          href="https://github.com/DruxAMB/arbiter"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="text-sm text-muted-foreground transition-colors hover:text-foreground"
+      {/* Floating Nav Pill — 60px radius, Carbon fill, white-alpha border, nav shadow */}
+      <nav className="fixed top-6 left-1/2 z-50 -translate-x-1/2">
+        <div
+          className="flex items-center gap-6 rounded-xl border bg-card px-6 py-3"
+          style={{ borderColor: "rgba(255,255,255,0.08)", boxShadow: "var(--shadow-nav)" }}
         >
-          GitHub
-        </a>
+          <div className="flex items-center gap-2">
+            <Zap className="h-5 w-5 text-accent" aria-hidden="true" />
+            <span className="text-sm font-medium tracking-tight text-foreground">Arbiter</span>
+          </div>
+          <a
+            href="https://github.com/DruxAMB/arbiter"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-sm transition-colors hover:text-foreground"
+            style={{ color: "var(--color-muted-foreground)" }}
+          >
+            GitHub
+          </a>
+          <Button
+            onClick={handleEnter}
+            size="sm"
+            className="h-8 rounded-lg px-4 text-sm font-medium"
+          >
+            Try demo
+            <ArrowRight className="ml-1.5 h-3.5 w-3.5" aria-hidden="true" />
+          </Button>
+        </div>
       </nav>
 
-      {/* Hero */}
-      <main className="relative z-10 mx-auto max-w-[1120px] px-5 pt-16 pb-24 sm:pt-24 sm:pb-32">
-        <div className="flex flex-col items-center text-center">
-          {/* Eyebrow */}
-          <span className="mb-6 inline-flex items-center gap-2 rounded-md border border-border bg-card px-4 py-1.5 text-xs font-medium uppercase tracking-[0.129em] text-muted-foreground">
+      {/* Hero — 80vh, centered, tight type stack */}
+      <main className="relative z-10 mx-auto max-w-[1200px] px-5">
+        <section className="flex min-h-[80vh] flex-col items-center justify-center text-center">
+          {/* Eyebrow — 30px radius, Carbon fill, 1px border */}
+          <span className="mb-8 inline-flex items-center gap-2 rounded-lg border border-border bg-card px-4 py-1.5 text-xs font-medium uppercase tracking-[0.129em] text-muted-foreground">
             <span className="h-1.5 w-1.5 rounded-full bg-success" />
             Live on Base
           </span>
 
-          {/* Headline — weight 500, tight line-height, Signal Violet second line */}
-          <h1 className="max-w-3xl text-4xl font-medium leading-[1.09] tracking-tight sm:text-5xl sm:leading-[1.05]">
+          {/* Headline — 96px desktop, weight 500, line-height 1.0, white + Signal Violet */}
+          <h1 className="max-w-4xl text-5xl font-medium leading-[1.09] tracking-tight sm:text-6xl lg:text-8xl lg:leading-[1.0]">
             Real-time CEX-DEX arbitrage
             <br />
             <span className="text-accent">intelligence on Base</span>
           </h1>
 
-          {/* Subhead — Ash color, normal spacing */}
-          <p className="mt-6 max-w-xl text-base leading-[1.5] sm:text-lg" style={{ color: "var(--color-muted-foreground)" }}>
+          {/* Subhead — 18px, weight 400, Ash #d1d3d4, max-width 560px */}
+          <p className="mt-8 max-w-[560px] text-lg font-normal leading-[1.5]" style={{ color: "#d1d3d4" }}>
             Detect price gaps between BingX and Uniswap V3, analyze opportunities
             with AI, and attest them on-chain. Built for traders who act in seconds.
           </p>
 
-          {/* CTA — Voltage Blue primary, Signal Violet ghost outline */}
-          <div className="mt-10 flex flex-col items-center gap-4 sm:flex-row">
+          {/* CTA — Voltage Blue primary + Signal Violet ghost outline */}
+          <div className="mt-12 flex flex-col items-center gap-4 sm:flex-row">
             <Button
               onClick={handleEnter}
               size="lg"
-              className="h-12 rounded-md px-8 text-base font-medium"
+              className="h-14 rounded-lg px-8 text-base font-medium"
             >
               Try the demo
               <ArrowRight className="ml-2 h-4 w-4" aria-hidden="true" />
@@ -82,67 +94,78 @@ export function Landing({ onEnter }: LandingProps) {
               href="https://github.com/DruxAMB/arbiter"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex h-12 items-center rounded-md border border-accent px-8 text-base font-medium text-accent transition-colors hover:bg-accent/10"
+              className="inline-flex h-14 items-center rounded-lg border border-accent px-8 text-base font-medium text-accent transition-colors hover:bg-accent/10"
             >
               View the code
             </a>
           </div>
-        </div>
+        </section>
 
-        {/* How it works — left-aligned per Refero guidelines */}
-        <div className="mt-20 grid grid-cols-1 gap-8 sm:mt-24 sm:grid-cols-3 sm:gap-6">
-          <div className="flex flex-col items-start text-left">
-            <div className="flex h-10 w-10 items-center justify-center rounded-md bg-accent/10">
-              <Search className="h-5 w-5 text-accent" aria-hidden="true" />
+        {/* Feature cards — 80-120px section gap, 3-col grid, Carbon fill + glow, 30px radius, 32px padding */}
+        <section className="pb-32">
+          <div className="grid grid-cols-1 gap-6 sm:grid-cols-3">
+            <div
+              className="flex flex-col items-start rounded-lg border border-border bg-card p-8"
+              style={{ boxShadow: "var(--glow-soft)" }}
+            >
+              <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-accent/10">
+                <Search className="h-5 w-5 text-accent" aria-hidden="true" />
+              </div>
+              <h2 className="mt-5 text-xs font-medium uppercase tracking-[0.129em] text-muted-foreground">
+                Step 1
+              </h2>
+              <p className="mt-2 text-lg font-medium">Scan</p>
+              <p className="mt-2 text-sm leading-relaxed" style={{ color: "#d1d3d4" }}>
+                Compare BingX and Uniswap V3 prices for 6 preset pairs, or input any
+                ERC-20 token address on Base.
+              </p>
             </div>
-            <h2 className="mt-4 text-sm font-medium uppercase tracking-[0.129em] text-muted-foreground">
-              Step 1
-            </h2>
-            <p className="mt-1 text-base font-medium">Scan</p>
-            <p className="mt-1 text-sm text-muted-foreground leading-relaxed">
-              Compare BingX and Uniswap V3 prices for 6 preset pairs, or input any
-              ERC-20 token address on Base.
-            </p>
-          </div>
-          <div className="flex flex-col items-start text-left">
-            <div className="flex h-10 w-10 items-center justify-center rounded-md bg-accent/10">
-              <Brain className="h-5 w-5 text-accent" aria-hidden="true" />
+            <div
+              className="flex flex-col items-start rounded-lg border border-border bg-card p-8"
+              style={{ boxShadow: "var(--glow-soft)" }}
+            >
+              <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-accent/10">
+                <Brain className="h-5 w-5 text-accent" aria-hidden="true" />
+              </div>
+              <h2 className="mt-5 text-xs font-medium uppercase tracking-[0.129em] text-muted-foreground">
+                Step 2
+              </h2>
+              <p className="mt-2 text-lg font-medium">Analyze</p>
+              <p className="mt-2 text-sm leading-relaxed" style={{ color: "#d1d3d4" }}>
+                Gemini AI evaluates the gap, estimates net profit after gas and
+                slippage, and assigns a confidence score.
+              </p>
             </div>
-            <h2 className="mt-4 text-sm font-medium uppercase tracking-[0.129em] text-muted-foreground">
-              Step 2
-            </h2>
-            <p className="mt-1 text-base font-medium">Analyze</p>
-            <p className="mt-1 text-sm text-muted-foreground leading-relaxed">
-              Gemini AI evaluates the gap, estimates net profit after gas and
-              slippage, and assigns a confidence score.
-            </p>
-          </div>
-          <div className="flex flex-col items-start text-left">
-            <div className="flex h-10 w-10 items-center justify-center rounded-md bg-accent/10">
-              <Link2 className="h-5 w-5 text-accent" aria-hidden="true" />
+            <div
+              className="flex flex-col items-start rounded-lg border border-border bg-card p-8"
+              style={{ boxShadow: "var(--glow-soft)" }}
+            >
+              <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-accent/10">
+                <Link2 className="h-5 w-5 text-accent" aria-hidden="true" />
+              </div>
+              <h2 className="mt-5 text-xs font-medium uppercase tracking-[0.129em] text-muted-foreground">
+                Step 3
+              </h2>
+              <p className="mt-2 text-lg font-medium">Attest</p>
+              <p className="mt-2 text-sm leading-relaxed" style={{ color: "#d1d3d4" }}>
+                Record the opportunity on-chain with a Base L2 transaction. Every
+                attestation is verifiable on Basescan.
+              </p>
             </div>
-            <h2 className="mt-4 text-sm font-medium uppercase tracking-[0.129em] text-muted-foreground">
-              Step 3
-            </h2>
-            <p className="mt-1 text-base font-medium">Attest</p>
-            <p className="mt-1 text-sm text-muted-foreground leading-relaxed">
-              Record the opportunity on-chain with a Base L2 transaction. Every
-              attestation is verifiable on Basescan.
-            </p>
           </div>
-        </div>
 
-        {/* Tech stack */}
-        <div className="mt-20 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-xs text-muted-foreground">
-          <span className="font-medium uppercase tracking-[0.1em]">Powered by</span>
-          <span>Base L2</span>
-          <span aria-hidden="true">·</span>
-          <span>BingX API</span>
-          <span aria-hidden="true">·</span>
-          <span>Uniswap V3</span>
-          <span aria-hidden="true">·</span>
-          <span>Gemini AI</span>
-        </div>
+          {/* Tech stack — logo strip style, Ash tone */}
+          <div className="mt-24 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-xs" style={{ color: "#d1d3d4" }}>
+            <span className="font-medium uppercase tracking-[0.129em]">Powered by</span>
+            <span>Base L2</span>
+            <span aria-hidden="true">·</span>
+            <span>BingX API</span>
+            <span aria-hidden="true">·</span>
+            <span>Uniswap V3</span>
+            <span aria-hidden="true">·</span>
+            <span>Gemini AI</span>
+          </div>
+        </section>
       </main>
     </div>
   )

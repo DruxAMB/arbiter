@@ -169,7 +169,7 @@ export function Dashboard() {
 
   return (
     <div className="bg-background">
-      <main className="mx-auto max-w-[1120px] px-5 py-8 space-y-6">
+      <main className="mx-auto max-w-[1200px] px-5 py-8 space-y-6">
         <Card style={{ boxShadow: "var(--glow-soft)" }}>
           <CardHeader>
             <CardTitle className="text-base">Scan Price Gap</CardTitle>
