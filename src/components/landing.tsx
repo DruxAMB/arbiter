@@ -28,10 +28,10 @@ export function Landing({ onEnter }: LandingProps) {
         />
       </div>
 
-      {/* Nav */}
+      {/* Nav — floating pill */}
       <nav className="relative z-10 mx-auto max-w-[1120px] px-5 py-6 flex items-center justify-between">
         <div className="flex items-center gap-2">
-          <div className="flex h-9 w-9 items-center justify-center rounded-sm bg-accent/10">
+          <div className="flex h-9 w-9 items-center justify-center rounded-md bg-accent/10">
             <Zap className="h-5 w-5 text-accent" aria-hidden="true" />
           </div>
           <span className="text-base font-medium tracking-tight">Arbiter</span>
@@ -50,30 +50,30 @@ export function Landing({ onEnter }: LandingProps) {
       <main className="relative z-10 mx-auto max-w-[1120px] px-5 pt-16 pb-24 sm:pt-24 sm:pb-32">
         <div className="flex flex-col items-center text-center">
           {/* Eyebrow */}
-          <span className="mb-6 inline-flex items-center gap-2 rounded-sm border border-border bg-card px-4 py-1.5 text-xs font-medium uppercase tracking-[0.1em] text-muted-foreground">
+          <span className="mb-6 inline-flex items-center gap-2 rounded-md border border-border bg-card px-4 py-1.5 text-xs font-medium uppercase tracking-[0.129em] text-muted-foreground">
             <span className="h-1.5 w-1.5 rounded-full bg-success" />
             Live on Base
           </span>
 
-          {/* Headline */}
-          <h1 className="max-w-3xl text-4xl font-bold leading-[1.1] tracking-tight sm:text-5xl sm:leading-[1.05]">
+          {/* Headline — weight 500, tight line-height, Signal Violet second line */}
+          <h1 className="max-w-3xl text-4xl font-medium leading-[1.09] tracking-tight sm:text-5xl sm:leading-[1.05]">
             Real-time CEX-DEX arbitrage
             <br />
             <span className="text-accent">intelligence on Base</span>
           </h1>
 
-          {/* Subhead */}
-          <p className="mt-6 max-w-xl text-base text-muted-foreground sm:text-lg" style={{ letterSpacing: "-0.6px", lineHeight: "31px" }}>
+          {/* Subhead — Ash color, normal spacing */}
+          <p className="mt-6 max-w-xl text-base leading-[1.5] sm:text-lg" style={{ color: "var(--color-muted-foreground)" }}>
             Detect price gaps between BingX and Uniswap V3, analyze opportunities
             with AI, and attest them on-chain. Built for traders who act in seconds.
           </p>
 
-          {/* CTA */}
+          {/* CTA — Voltage Blue primary, Signal Violet ghost outline */}
           <div className="mt-10 flex flex-col items-center gap-4 sm:flex-row">
             <Button
               onClick={handleEnter}
               size="lg"
-              className="h-12 rounded-sm px-8 text-base font-medium"
+              className="h-12 rounded-md px-8 text-base font-medium"
             >
               Try the demo
               <ArrowRight className="ml-2 h-4 w-4" aria-hidden="true" />
@@ -82,20 +82,20 @@ export function Landing({ onEnter }: LandingProps) {
               href="https://github.com/DruxAMB/arbiter"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-sm text-muted-foreground underline-offset-4 transition-colors hover:text-foreground hover:underline"
+              className="inline-flex h-12 items-center rounded-md border border-accent px-8 text-base font-medium text-accent transition-colors hover:bg-accent/10"
             >
               View the code
             </a>
           </div>
         </div>
 
-        {/* How it works */}
+        {/* How it works — left-aligned per Refero guidelines */}
         <div className="mt-20 grid grid-cols-1 gap-8 sm:mt-24 sm:grid-cols-3 sm:gap-6">
-          <div className="flex flex-col items-center text-center sm:items-start sm:text-left">
-            <div className="flex h-10 w-10 items-center justify-center rounded-sm bg-accent/10">
+          <div className="flex flex-col items-start text-left">
+            <div className="flex h-10 w-10 items-center justify-center rounded-md bg-accent/10">
               <Search className="h-5 w-5 text-accent" aria-hidden="true" />
             </div>
-            <h2 className="mt-4 text-sm font-medium uppercase tracking-[0.08em] text-muted-foreground">
+            <h2 className="mt-4 text-sm font-medium uppercase tracking-[0.129em] text-muted-foreground">
               Step 1
             </h2>
             <p className="mt-1 text-base font-medium">Scan</p>
@@ -104,11 +104,11 @@ export function Landing({ onEnter }: LandingProps) {
               ERC-20 token address on Base.
             </p>
           </div>
-          <div className="flex flex-col items-center text-center sm:items-start sm:text-left">
-            <div className="flex h-10 w-10 items-center justify-center rounded-sm bg-accent/10">
+          <div className="flex flex-col items-start text-left">
+            <div className="flex h-10 w-10 items-center justify-center rounded-md bg-accent/10">
               <Brain className="h-5 w-5 text-accent" aria-hidden="true" />
             </div>
-            <h2 className="mt-4 text-sm font-medium uppercase tracking-[0.08em] text-muted-foreground">
+            <h2 className="mt-4 text-sm font-medium uppercase tracking-[0.129em] text-muted-foreground">
               Step 2
             </h2>
             <p className="mt-1 text-base font-medium">Analyze</p>
@@ -117,11 +117,11 @@ export function Landing({ onEnter }: LandingProps) {
               slippage, and assigns a confidence score.
             </p>
           </div>
-          <div className="flex flex-col items-center text-center sm:items-start sm:text-left">
-            <div className="flex h-10 w-10 items-center justify-center rounded-sm bg-accent/10">
+          <div className="flex flex-col items-start text-left">
+            <div className="flex h-10 w-10 items-center justify-center rounded-md bg-accent/10">
               <Link2 className="h-5 w-5 text-accent" aria-hidden="true" />
             </div>
-            <h2 className="mt-4 text-sm font-medium uppercase tracking-[0.08em] text-muted-foreground">
+            <h2 className="mt-4 text-sm font-medium uppercase tracking-[0.129em] text-muted-foreground">
               Step 3
             </h2>
             <p className="mt-1 text-base font-medium">Attest</p>

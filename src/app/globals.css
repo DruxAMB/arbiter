@@ -4,37 +4,36 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
-  --background: #191919;
-  --foreground: #f8f8f8;
-  --card: #282828;
-  --card-foreground: #f8f8f8;
-  --popover: #282828;
-  --popover-foreground: #f8f8f8;
-  --primary: #ddff46;
-  --primary-foreground: #191919;
-  --secondary: #404040;
-  --secondary-foreground: #f8f8f8;
-  --muted: #2e2e2e;
-  --muted-foreground: #939598;
-  --accent: #405bff;
-  --accent-foreground: #f8f8f8;
+  --background: #0e0e0e;
+  --foreground: #ffffff;
+  --card: #191919;
+  --card-foreground: #ffffff;
+  --popover: #191919;
+  --popover-foreground: #ffffff;
+  --primary: #405bff;
+  --primary-foreground: #ffffff;
+  --secondary: #191919;
+  --secondary-foreground: #ffffff;
+  --muted: #2c2c2c;
+  --muted-foreground: #a7a9ac;
+  --accent: #7084ff;
+  --accent-foreground: #ffffff;
   --destructive: #e83b3b;
-  --destructive-foreground: #f8f8f8;
+  --destructive-foreground: #ffffff;
   --success: #00da7b;
-  --success-foreground: #191919;
+  --success-foreground: #0e0e0e;
   --warning: #eec340;
-  --warning-foreground: #191919;
-  --border: #2e2e2e;
-  --input: #2e2e2e;
-  --ring: #405bff;
-  --radius: 12px;
-  --radius-button: 8px;
-  --radius-card: 20px;
+  --warning-foreground: #0e0e0e;
+  --border: rgba(255, 255, 255, 0.1);
+  --input: #58595b;
+  --ring: #7084ff;
+  --radius: 30px;
+  --radius-input: 10px;
   --radius-pill: 60px;
-  --glow: rgba(64, 91, 255, 0.25);
-  --glow-soft: rgba(112, 132, 255, 0.19);
-  --gradient-brand: linear-gradient(179deg, #405bff 0%, #7084ff 100%);
-  --gradient-lime: linear-gradient(160deg, #95eb90, #adf63d 50%, #eafca1);
+  --glow: 0 0 40px rgba(64, 91, 255, 0.25);
+  --glow-soft: 0 0 30px rgba(112, 132, 255, 0.19);
+  --gradient-brand: linear-gradient(179deg, #405bff 1.06%, #7084ff 123.42%);
+  --shadow-nav: 0 4px 20px rgba(0, 0, 0, 0.45);
 }
 
 @theme inline {
@@ -61,9 +60,9 @@
   --color-border: var(--border);
   --color-input: var(--input);
   --color-ring: var(--ring);
-  --radius-sm: var(--radius-button);
+  --radius-sm: var(--radius-input);
   --radius-md: var(--radius);
-  --radius-lg: var(--radius-card);
+  --radius-lg: var(--radius);
   --radius-xl: var(--radius-pill);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
@@ -78,12 +77,18 @@ body {
   color: var(--foreground);
   font-family: var(--font-sans), Arial, Helvetica, sans-serif;
   font-size: 16px;
-  line-height: 24px;
-  letter-spacing: -0.48px;
+  line-height: 1.5;
+  letter-spacing: normal;
+}
+
+h1, h2, h3 {
+  font-weight: 500;
+  letter-spacing: normal;
 }
 
 @media (hover: hover) {
   .hover\:text-primary:hover { color: var(--primary); }
+  .hover\:text-accent:hover { color: var(--accent); }
   .hover\:underline:hover { text-decoration: underline; }
   .hover\:bg-secondary:hover { background: var(--secondary); }
   .hover\:bg-muted:hover { background: var(--muted); }

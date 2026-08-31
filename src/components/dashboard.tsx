@@ -170,7 +170,7 @@ export function Dashboard() {
   return (
     <div className="bg-background">
       <main className="mx-auto max-w-[1120px] px-5 py-8 space-y-6">
-        <Card>
+        <Card style={{ boxShadow: "var(--glow-soft)" }}>
           <CardHeader>
             <CardTitle className="text-base">Scan Price Gap</CardTitle>
             <CardDescription>Select a token pair and scan for CEX-DEX arbitrage opportunities</CardDescription>
@@ -190,7 +190,7 @@ export function Dashboard() {
                   </option>
                 ))}
               </select>
-              <Button type="submit" disabled={scanState === "loading"} className="flex-1 sm:flex-none h-12 rounded-sm">
+              <Button type="submit" disabled={scanState === "loading"} className="flex-1 sm:flex-none h-12 rounded-md">
                 {scanState === "loading" ? (
                   <>
                     <Activity className="mr-2 h-4 w-4 animate-pulse" />
@@ -207,7 +207,7 @@ export function Dashboard() {
                 type="button"
                 variant="outline"
                 onClick={() => setShowCustom(!showCustom)}
-                className="flex-1 sm:flex-none h-12 rounded-sm"
+                className="flex-1 sm:flex-none h-12 rounded-md"
               >
                 <Search className="mr-2 h-4 w-4" />
                 {showCustom ? "Use Presets" : "Custom Token"}
@@ -215,7 +215,7 @@ export function Dashboard() {
             </form>
 
             {showCustom && (
-              <div className="rounded-lg border border-border bg-card p-4 space-y-3">
+              <div className="rounded-md border border-border bg-card p-4 space-y-3">
                 <p className="text-xs text-muted-foreground">
                   Enter any two ERC-20 token addresses on Base. Optionally provide a Uniswap V3 pool address — if omitted, the scanner tries to discover one automatically.
                 </p>
@@ -283,7 +283,7 @@ export function Dashboard() {
             )}
 
             {scanState === "error" && (
-              <div className="rounded-lg border border-destructive/30 bg-destructive/5 p-4">
+              <div className="rounded-md border border-destructive/30 bg-destructive/5 p-4">
                 <p className="text-sm text-destructive">{scanError}</p>
                 <Button variant="outline" size="sm" className="mt-2" onClick={handleScan}>
                   Retry scan
@@ -294,7 +294,7 @@ export function Dashboard() {
             {scanState === "success" && scanResult && (
               <div className="space-y-4">
                 {!scanResult.cexSupported && (
-                  <div className="flex items-start gap-2 rounded-lg border border-warning/30 bg-warning/5 p-4">
+                  <div className="flex items-start gap-2 rounded-md border border-warning/30 bg-warning/5 p-4">
                     <AlertTriangle className="h-4 w-4 text-warning mt-0.5 shrink-0" aria-hidden="true" />
                     <div>
                       <p className="text-sm font-medium text-warning">Not listed on BingX</p>
@@ -313,7 +313,7 @@ export function Dashboard() {
                           <Badge variant="outline" className="text-xs text-muted-foreground">N/A</Badge>
                         )}
                       </div>
-                      <p className="text-2xl font-bold tabular-nums">
+                      <p className="text-2xl font-medium tabular-nums">
                         {scanResult.cexSupported ? formatPrice(scanResult.bingxPrice) : "—"}
                       </p>
                       <p className="text-xs text-muted-foreground mt-1">{scanResult.symbol}</p>
@@ -324,7 +324,7 @@ export function Dashboard() {
                       <div className="flex items-center gap-2 mb-1">
                         <Badge variant="secondary" className="text-xs">Base DEX</Badge>
                       </div>
-                      <p className="text-2xl font-bold tabular-nums">
+                      <p className="text-2xl font-medium tabular-nums">
                         {formatPrice(scanResult.dexPrice)}
                       </p>
                       <p className="text-xs text-muted-foreground mt-1">
@@ -335,7 +335,7 @@ export function Dashboard() {
                 </div>
 
                 {scanResult.cexSupported && (
-                  <div className="flex items-center justify-between rounded-lg border border-border bg-card p-4">
+                  <div className="flex items-center justify-between rounded-md border border-border bg-card p-4" style={{ boxShadow: "var(--glow-soft)" }}>
                     <div className="flex items-center gap-3">
                       {scanResult.direction === "CEX_LOWER" ? (
                         <TrendingDown className="h-5 w-5 text-accent" aria-hidden="true" />
@@ -376,7 +376,7 @@ export function Dashboard() {
                     onClick={handleAnalyze}
                     disabled={analyzeState === "loading" || analyzeState === "success"}
                     variant="secondary"
-                    className="flex-1 h-12 rounded-sm"
+                    className="flex-1 h-12 rounded-md"
                   >
                     {analyzeState === "loading" ? (
                       <>
@@ -393,7 +393,7 @@ export function Dashboard() {
                   <Button
                     onClick={handleAttest}
                     disabled={attestState === "loading" || attestState === "success"}
-                    className="flex-1 h-12 rounded-sm"
+                    className="flex-1 h-12 rounded-md"
                   >
                     {attestState === "loading" ? (
                       <>
@@ -430,7 +430,7 @@ export function Dashboard() {
                 </div>
               )}
               {analyzeState === "error" && (
-                <div className="rounded-lg border border-destructive/30 bg-destructive/5 p-4">
+                <div className="rounded-md border border-destructive/30 bg-destructive/5 p-4">
                   <p className="text-sm text-destructive">{analyzeError}</p>
                   <Button variant="outline" size="sm" className="mt-2" onClick={handleAnalyze}>
                     Retry analysis
@@ -471,7 +471,7 @@ export function Dashboard() {
                 </div>
               )}
               {attestState === "error" && (
-                <div className="rounded-lg border border-destructive/30 bg-destructive/5 p-4">
+                <div className="rounded-md border border-destructive/30 bg-destructive/5 p-4">
                   <p className="text-sm text-destructive">{attestError}</p>
                   <Button variant="outline" size="sm" className="mt-2" onClick={handleAttest}>
                     Retry attestation
