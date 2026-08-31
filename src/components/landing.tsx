@@ -60,7 +60,7 @@ export function Landing({ onEnter }: LandingProps) {
       <main className="relative z-10 mx-auto max-w-[1200px] px-5">
         <section className="flex min-h-[80vh] flex-col items-center justify-center pt-20 text-center">
           {/* Eyebrow — 30px radius, Carbon fill, 1px border */}
-          <span className="mb-8 inline-flex items-center gap-2 rounded-lg border border-border bg-card px-4 py-1.5 text-xs font-medium uppercase tracking-[0.129em] text-muted-foreground">
+          <span className="mb-8 inline-flex items-center gap-2 rounded-lg border border-border bg-card px-4 py-1.5 text-sm font-medium uppercase tracking-[0.129em] text-muted-foreground">
             <span className="h-1.5 w-1.5 rounded-full bg-accent" />
             Live on Base
           </span>
@@ -109,7 +109,7 @@ export function Landing({ onEnter }: LandingProps) {
               <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-accent/10">
                 <Search className="h-5 w-5 text-accent" aria-hidden="true" />
               </div>
-              <h2 className="mt-5 text-xs font-medium uppercase tracking-[0.129em] text-muted-foreground">
+              <h2 className="mt-5 text-sm font-medium uppercase tracking-[0.129em] text-muted-foreground">
                 Step 1
               </h2>
               <p className="mt-2 text-lg font-medium">Scan</p>
@@ -125,7 +125,7 @@ export function Landing({ onEnter }: LandingProps) {
               <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-accent/10">
                 <Brain className="h-5 w-5 text-accent" aria-hidden="true" />
               </div>
-              <h2 className="mt-5 text-xs font-medium uppercase tracking-[0.129em] text-muted-foreground">
+              <h2 className="mt-5 text-sm font-medium uppercase tracking-[0.129em] text-muted-foreground">
                 Step 2
               </h2>
               <p className="mt-2 text-lg font-medium">Analyze</p>
@@ -141,7 +141,7 @@ export function Landing({ onEnter }: LandingProps) {
               <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-accent/10">
                 <Link2 className="h-5 w-5 text-accent" aria-hidden="true" />
               </div>
-              <h2 className="mt-5 text-xs font-medium uppercase tracking-[0.129em] text-muted-foreground">
+              <h2 className="mt-5 text-sm font-medium uppercase tracking-[0.129em] text-muted-foreground">
                 Step 3
               </h2>
               <p className="mt-2 text-lg font-medium">Attest</p>

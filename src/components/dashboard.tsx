@@ -305,10 +305,10 @@ export function Dashboard() {
                   </div>
                 )}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <Card className="border-border">
+                  <Card>
                     <CardContent className="pt-4">
                       <div className="flex items-center gap-2 mb-1">
-                        <Badge variant="secondary" className="text-xs">BingX (CEX)</Badge>
+                        <Badge variant="secondary">BingX (CEX)</Badge>
                         {!scanResult.cexSupported && (
                           <Badge variant="outline" className="text-sm text-muted-foreground">N/A</Badge>
                         )}
@@ -319,10 +319,10 @@ export function Dashboard() {
                       <p className="text-sm text-muted-foreground mt-1">{scanResult.symbol}</p>
                     </CardContent>
                   </Card>
-                  <Card className="border-border">
+                  <Card>
                     <CardContent className="pt-4">
                       <div className="flex items-center gap-2 mb-1">
-                        <Badge variant="secondary" className="text-xs">Base DEX</Badge>
+                        <Badge variant="secondary">Base DEX</Badge>
                       </div>
                       <p className="text-2xl font-medium tabular-nums">
                         {formatPrice(scanResult.dexPrice)}
@@ -444,7 +444,7 @@ export function Dashboard() {
                     <Badge variant="secondary">
                       Confidence: {analysis.confidence}/100
                     </Badge>
-                    <Badge variant={analysis.riskLevel === "LOW" ? "default" : analysis.riskLevel === "MEDIUM" ? "secondary" : "destructive"}>
+                    <Badge variant={analysis.riskLevel === "LOW" ? "default" : analysis.riskLevel === "MEDIUM" ? "secondary" : "outline"}>
                       Risk: {analysis.riskLevel}
                     </Badge>
                   </div>
@@ -483,7 +483,7 @@ export function Dashboard() {
                   <div className="flex items-center gap-2 text-sm">
                     <span className="text-accent font-medium">Transaction confirmed</span>
                     {attestResult.simulated && (
-                      <Badge variant="secondary" className="text-xs">Simulated</Badge>
+                      <Badge variant="secondary">Simulated</Badge>
                     )}
                   </div>
                   <a

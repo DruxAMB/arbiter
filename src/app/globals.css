@@ -18,12 +18,12 @@
   --muted-foreground: #a7a9ac;
   --accent: #7084ff;
   --accent-foreground: #ffffff;
-  --destructive: #e83b3b;
+  --destructive: #7084ff;
   --destructive-foreground: #ffffff;
-  --success: #00da7b;
-  --success-foreground: #0e0e0e;
-  --warning: #eec340;
-  --warning-foreground: #0e0e0e;
+  --success: #7084ff;
+  --success-foreground: #ffffff;
+  --warning: #7084ff;
+  --warning-foreground: #ffffff;
   --border: rgba(255, 255, 255, 0.1);
   --input: #58595b;
   --ring: #7084ff;
