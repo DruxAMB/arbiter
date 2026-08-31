@@ -31,7 +31,7 @@ export function Landing({ onEnter }: LandingProps) {
       {/* Floating Nav Pill — 60px radius, Carbon fill, white-alpha border, nav shadow */}
       <nav className="fixed top-6 left-1/2 z-50 -translate-x-1/2">
         <div
-          className="flex items-center gap-6 rounded-xl border bg-card px-6 py-3"
+          className="flex items-center gap-6 rounded-xl border bg-card pl-6 pr-2 py-2"
           style={{ borderColor: "rgba(255,255,255,0.08)", boxShadow: "var(--shadow-nav)" }}
         >
           <div className="flex items-center gap-2">
@@ -42,15 +42,13 @@ export function Landing({ onEnter }: LandingProps) {
             href="https://github.com/DruxAMB/arbiter"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-sm transition-colors hover:text-foreground"
-            style={{ color: "var(--color-muted-foreground)" }}
+            className="text-sm text-ash transition-colors hover:text-foreground"
           >
             GitHub
           </a>
           <Button
             onClick={handleEnter}
-            size="sm"
-            className="h-8 rounded-lg px-4 text-sm font-medium"
+            className="h-9 rounded-lg px-5 text-sm font-medium"
           >
             Try demo
             <ArrowRight className="ml-1.5 h-3.5 w-3.5" aria-hidden="true" />
@@ -60,10 +58,10 @@ export function Landing({ onEnter }: LandingProps) {
 
       {/* Hero — 80vh, centered, tight type stack */}
       <main className="relative z-10 mx-auto max-w-[1200px] px-5">
-        <section className="flex min-h-[80vh] flex-col items-center justify-center text-center">
+        <section className="flex min-h-[80vh] flex-col items-center justify-center pt-20 text-center">
           {/* Eyebrow — 30px radius, Carbon fill, 1px border */}
           <span className="mb-8 inline-flex items-center gap-2 rounded-lg border border-border bg-card px-4 py-1.5 text-xs font-medium uppercase tracking-[0.129em] text-muted-foreground">
-            <span className="h-1.5 w-1.5 rounded-full bg-success" />
+            <span className="h-1.5 w-1.5 rounded-full bg-accent" />
             Live on Base
           </span>
 
@@ -75,7 +73,7 @@ export function Landing({ onEnter }: LandingProps) {
           </h1>
 
           {/* Subhead — 18px, weight 400, Ash #d1d3d4, max-width 560px */}
-          <p className="mt-8 max-w-[560px] text-lg font-normal leading-[1.5]" style={{ color: "#d1d3d4" }}>
+          <p className="mt-8 max-w-[560px] text-lg font-normal leading-[1.5] text-ash">
             Detect price gaps between BingX and Uniswap V3, analyze opportunities
             with AI, and attest them on-chain. Built for traders who act in seconds.
           </p>
@@ -115,7 +113,7 @@ export function Landing({ onEnter }: LandingProps) {
                 Step 1
               </h2>
               <p className="mt-2 text-lg font-medium">Scan</p>
-              <p className="mt-2 text-sm leading-relaxed" style={{ color: "#d1d3d4" }}>
+              <p className="mt-2 text-sm leading-relaxed text-ash">
                 Compare BingX and Uniswap V3 prices for 6 preset pairs, or input any
                 ERC-20 token address on Base.
               </p>
@@ -131,7 +129,7 @@ export function Landing({ onEnter }: LandingProps) {
                 Step 2
               </h2>
               <p className="mt-2 text-lg font-medium">Analyze</p>
-              <p className="mt-2 text-sm leading-relaxed" style={{ color: "#d1d3d4" }}>
+              <p className="mt-2 text-sm leading-relaxed text-ash">
                 Gemini AI evaluates the gap, estimates net profit after gas and
                 slippage, and assigns a confidence score.
               </p>
@@ -147,7 +145,7 @@ export function Landing({ onEnter }: LandingProps) {
                 Step 3
               </h2>
               <p className="mt-2 text-lg font-medium">Attest</p>
-              <p className="mt-2 text-sm leading-relaxed" style={{ color: "#d1d3d4" }}>
+              <p className="mt-2 text-sm leading-relaxed text-ash">
                 Record the opportunity on-chain with a Base L2 transaction. Every
                 attestation is verifiable on Basescan.
               </p>
@@ -155,7 +153,7 @@ export function Landing({ onEnter }: LandingProps) {
           </div>
 
           {/* Tech stack — logo strip style, Ash tone */}
-          <div className="mt-24 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-xs" style={{ color: "#d1d3d4" }}>
+          <div className="mt-24 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-sm text-ash">
             <span className="font-medium uppercase tracking-[0.129em]">Powered by</span>
             <span>Base L2</span>
             <span aria-hidden="true">·</span>

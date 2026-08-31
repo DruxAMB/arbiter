@@ -55,25 +55,26 @@ export function AppShell({ landing, dashboard }: AppShellProps) {
   if (showApp) {
     return (
       <div className="min-h-[100dvh] bg-background">
-        <header className="border-b border-border">
-          <div className="mx-auto max-w-[1200px] px-5 py-4 flex items-center justify-between">
+        <nav className="fixed top-6 left-1/2 z-50 -translate-x-1/2">
+          <div
+            className="flex items-center gap-6 rounded-xl border bg-card pl-6 pr-2 py-2"
+            style={{ borderColor: "rgba(255,255,255,0.08)", boxShadow: "var(--shadow-nav)" }}
+          >
             <button
               onClick={exitToLanding}
               className="flex items-center gap-2 transition-opacity hover:opacity-80"
               aria-label="Back to home"
             >
-              <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-accent/10">
-                <Zap className="h-5 w-5 text-accent" aria-hidden="true" />
-              </div>
-              <span className="text-base font-medium tracking-tight">Arbiter</span>
+              <Zap className="h-5 w-5 text-accent" aria-hidden="true" />
+              <span className="text-sm font-medium tracking-tight text-foreground">Arbiter</span>
             </button>
             <div className="flex items-center gap-1.5 rounded-lg bg-accent/10 px-3 py-1">
               <div className="h-2 w-2 rounded-full bg-accent animate-pulse" />
-              <span className="text-xs font-medium text-accent">Live</span>
+              <span className="text-sm font-medium text-accent">Live</span>
             </div>
           </div>
-        </header>
-        {dashboard}
+        </nav>
+        <div className="pt-24">{dashboard}</div>
       </div>
     )
   }

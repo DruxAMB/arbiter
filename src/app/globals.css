@@ -34,6 +34,72 @@
   --glow-soft: 0 0 30px rgba(112, 132, 255, 0.19);
   --gradient-brand: linear-gradient(179deg, #405bff 1.06%, #7084ff 123.42%);
   --shadow-nav: 0 4px 20px rgba(0, 0, 0, 0.45);
+
+  /* Refero named color tokens */
+  --signal-violet: #7084ff;
+  --voltage-blue: #405bff;
+  --midnight-ink: #0e0e0e;
+  --carbon: #191919;
+  --graphite: #414042;
+  --steel: #58595b;
+  --slate: #6d6e71;
+  --fog: #a7a9ac;
+  --ash: #d1d3d4;
+  --paper: #ffffff;
+  --smoke: #2c2c2c;
+  --plasma-cyan: #3dd6f5;
+  --gradient-signal-violet: linear-gradient(179deg, #405bff 1.06%, #7084ff 123.42%);
+
+  /* Typography scale */
+  --text-caption: 12px;
+  --leading-caption: 1.5;
+  --text-body-sm: 14px;
+  --leading-body-sm: 1.5;
+  --text-body: 16px;
+  --leading-body: 1.5;
+  --text-subheading: 20px;
+  --leading-subheading: 1.4;
+  --text-heading-sm: 24px;
+  --leading-heading-sm: 1.3;
+  --text-heading: 36px;
+  --leading-heading: 1.2;
+  --text-heading-lg: 66px;
+  --leading-heading-lg: 1.09;
+  --text-display: 100px;
+  --leading-display: 1;
+
+  /* Font weights */
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+
+  /* Spacing */
+  --spacing-8: 8px;
+  --spacing-16: 16px;
+  --spacing-24: 24px;
+  --spacing-32: 32px;
+  --spacing-40: 40px;
+  --spacing-48: 48px;
+  --spacing-64: 64px;
+  --spacing-72: 72px;
+  --spacing-80: 80px;
+  --spacing-104: 104px;
+  --spacing-120: 120px;
+  --spacing-160: 160px;
+
+  /* Named radii */
+  --radius-tags: 30px;
+  --radius-cards: 30px;
+  --radius-inputs: 10px;
+  --radius-buttons: 30px;
+  --radius-navpill: 60px;
+
+  /* Surfaces */
+  --surface-midnight-canvas: #0e0e0e;
+  --surface-carbon-panel: #191919;
+  --surface-graphite-edge: #414042;
+  --surface-product-white: #ffffff;
 }
 
 @theme inline {
@@ -60,6 +126,18 @@
   --color-border: var(--border);
   --color-input: var(--input);
   --color-ring: var(--ring);
+  --color-signal-violet: var(--signal-violet);
+  --color-voltage-blue: var(--voltage-blue);
+  --color-midnight-ink: var(--midnight-ink);
+  --color-carbon: var(--carbon);
+  --color-graphite: var(--graphite);
+  --color-steel: var(--steel);
+  --color-slate: var(--slate);
+  --color-fog: var(--fog);
+  --color-ash: var(--ash);
+  --color-paper: var(--paper);
+  --color-smoke: var(--smoke);
+  --color-plasma-cyan: var(--plasma-cyan);
   --radius-sm: var(--radius-input);
   --radius-md: var(--radius);
   --radius-lg: var(--radius);

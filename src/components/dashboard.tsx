@@ -182,7 +182,7 @@ export function Dashboard() {
                 onChange={(e) => setSelectedSymbol(e.target.value)}
                 disabled={showCustom}
                 aria-label="Select token pair"
-                className="flex h-12 w-full sm:w-48 rounded-sm border border-input bg-background px-4 py-2 text-base ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring disabled:opacity-50"
+                className="flex h-12 w-full sm:w-48 rounded-sm border border-input bg-card px-4 py-2 text-base ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring disabled:opacity-50"
               >
                 {SUPPORTED_SYMBOLS.map((sym) => (
                   <option key={sym} value={sym}>
@@ -190,7 +190,7 @@ export function Dashboard() {
                   </option>
                 ))}
               </select>
-              <Button type="submit" disabled={scanState === "loading"} className="flex-1 sm:flex-none h-12 rounded-md">
+              <Button type="submit" disabled={scanState === "loading"} className="flex-1 sm:flex-none h-12 rounded-lg">
                 {scanState === "loading" ? (
                   <>
                     <Activity className="mr-2 h-4 w-4 animate-pulse" />
@@ -207,7 +207,7 @@ export function Dashboard() {
                 type="button"
                 variant="outline"
                 onClick={() => setShowCustom(!showCustom)}
-                className="flex-1 sm:flex-none h-12 rounded-md"
+                className="flex-1 sm:flex-none h-12 rounded-lg"
               >
                 <Search className="mr-2 h-4 w-4" />
                 {showCustom ? "Use Presets" : "Custom Token"}
@@ -215,54 +215,54 @@ export function Dashboard() {
             </form>
 
             {showCustom && (
-              <div className="rounded-md border border-border bg-card p-4 space-y-3">
-                <p className="text-xs text-muted-foreground">
+              <div className="rounded-lg border border-border bg-card p-4 space-y-3">
+                <p className="text-sm text-muted-foreground">
                   Enter any two ERC-20 token addresses on Base. Optionally provide a Uniswap V3 pool address — if omitted, the scanner tries to discover one automatically.
                 </p>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   <div>
-                    <label htmlFor="custom-token0" className="text-xs font-medium text-muted-foreground mb-1 block">Token 0 Address</label>
+                    <label htmlFor="custom-token0" className="text-sm font-medium text-muted-foreground mb-1 block">Token 0 Address</label>
                     <input
                       id="custom-token0"
                       type="text"
                       value={customToken0}
                       onChange={(e) => setCustomToken0(e.target.value)}
                       placeholder="0x..."
-                      className="flex h-12 w-full rounded-full border border-input bg-background px-4 py-2 text-base font-mono ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                      className="flex h-12 w-full rounded-sm border border-input bg-card px-4 py-2 text-base font-mono ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
                     />
                   </div>
                   <div>
-                    <label htmlFor="custom-token1" className="text-xs font-medium text-muted-foreground mb-1 block">Token 1 Address</label>
+                    <label htmlFor="custom-token1" className="text-sm font-medium text-muted-foreground mb-1 block">Token 1 Address</label>
                     <input
                       id="custom-token1"
                       type="text"
                       value={customToken1}
                       onChange={(e) => setCustomToken1(e.target.value)}
                       placeholder="0x..."
-                      className="flex h-12 w-full rounded-sm border border-input bg-background px-4 py-2 text-base font-mono ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                      className="flex h-12 w-full rounded-sm border border-input bg-card px-4 py-2 text-base font-mono ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
                     />
                   </div>
                 </div>
                 <div>
-                  <label htmlFor="custom-label" className="text-xs font-medium text-muted-foreground mb-1 block">Label (optional)</label>
+                  <label htmlFor="custom-label" className="text-sm font-medium text-muted-foreground mb-1 block">Label (optional)</label>
                   <input
                     id="custom-label"
                     type="text"
                     value={customLabel}
                     onChange={(e) => setCustomLabel(e.target.value)}
                     placeholder="e.g. MYTOKEN-USDC"
-                    className="flex h-12 w-full sm:w-64 rounded-sm border border-input bg-background px-4 py-2 text-base ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                    className="flex h-12 w-full sm:w-64 rounded-sm border border-input bg-card px-4 py-2 text-base ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
                   />
                 </div>
                 <div>
-                  <label htmlFor="custom-pool" className="text-xs font-medium text-muted-foreground mb-1 block">Pool Address (optional — improves reliability)</label>
+                  <label htmlFor="custom-pool" className="text-sm font-medium text-muted-foreground mb-1 block">Pool Address (optional — improves reliability)</label>
                   <input
                     id="custom-pool"
                     type="text"
                     value={customPool}
                     onChange={(e) => setCustomPool(e.target.value)}
                     placeholder="0x... (Uniswap V3 pool on Base)"
-                    className="flex h-12 w-full rounded-sm border border-input bg-background px-4 py-2 text-base font-mono ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                    className="flex h-12 w-full rounded-sm border border-input bg-card px-4 py-2 text-base font-mono ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
                   />
                 </div>
               </div>
@@ -283,8 +283,8 @@ export function Dashboard() {
             )}
 
             {scanState === "error" && (
-              <div className="rounded-md border border-destructive/30 bg-destructive/5 p-4">
-                <p className="text-sm text-destructive">{scanError}</p>
+              <div className="rounded-lg border border-accent/30 bg-accent/5 p-4">
+                <p className="text-sm text-accent">{scanError}</p>
                 <Button variant="outline" size="sm" className="mt-2" onClick={handleScan}>
                   Retry scan
                 </Button>
@@ -294,11 +294,11 @@ export function Dashboard() {
             {scanState === "success" && scanResult && (
               <div className="space-y-4">
                 {!scanResult.cexSupported && (
-                  <div className="flex items-start gap-2 rounded-md border border-warning/30 bg-warning/5 p-4">
-                    <AlertTriangle className="h-4 w-4 text-warning mt-0.5 shrink-0" aria-hidden="true" />
+                  <div className="flex items-start gap-2 rounded-lg border border-accent/30 bg-accent/5 p-4">
+                    <AlertTriangle className="h-4 w-4 text-accent mt-0.5 shrink-0" aria-hidden="true" />
                     <div>
-                      <p className="text-sm font-medium text-warning">Not listed on BingX</p>
-                      <p className="text-xs text-muted-foreground mt-0.5">
+                      <p className="text-sm font-medium text-accent">Not listed on BingX</p>
+                      <p className="text-sm text-muted-foreground mt-0.5">
                         This token pair is not available on BingX CEX. Showing DEX price only — no CEX-DEX arbitrage gap available.
                       </p>
                     </div>
@@ -310,13 +310,13 @@ export function Dashboard() {
                       <div className="flex items-center gap-2 mb-1">
                         <Badge variant="secondary" className="text-xs">BingX (CEX)</Badge>
                         {!scanResult.cexSupported && (
-                          <Badge variant="outline" className="text-xs text-muted-foreground">N/A</Badge>
+                          <Badge variant="outline" className="text-sm text-muted-foreground">N/A</Badge>
                         )}
                       </div>
                       <p className="text-2xl font-medium tabular-nums">
                         {scanResult.cexSupported ? formatPrice(scanResult.bingxPrice) : "—"}
                       </p>
-                      <p className="text-xs text-muted-foreground mt-1">{scanResult.symbol}</p>
+                      <p className="text-sm text-muted-foreground mt-1">{scanResult.symbol}</p>
                     </CardContent>
                   </Card>
                   <Card className="border-border">
@@ -327,7 +327,7 @@ export function Dashboard() {
                       <p className="text-2xl font-medium tabular-nums">
                         {formatPrice(scanResult.dexPrice)}
                       </p>
-                      <p className="text-xs text-muted-foreground mt-1">
+                      <p className="text-sm text-muted-foreground mt-1">
                         Uniswap V3 · {scanResult.symbol}
                       </p>
                     </CardContent>
@@ -335,7 +335,7 @@ export function Dashboard() {
                 </div>
 
                 {scanResult.cexSupported && (
-                  <div className="flex items-center justify-between rounded-md border border-border bg-card p-4" style={{ boxShadow: "var(--glow-soft)" }}>
+                  <div className="flex items-center justify-between rounded-lg border border-border bg-card p-4" style={{ boxShadow: "var(--glow-soft)" }}>
                     <div className="flex items-center gap-3">
                       {scanResult.direction === "CEX_LOWER" ? (
                         <TrendingDown className="h-5 w-5 text-accent" aria-hidden="true" />
@@ -346,7 +346,7 @@ export function Dashboard() {
                         <p className="text-sm font-medium">
                           Gap: <span className="text-accent">{scanResult.gapPercent.toFixed(3)}%</span>
                         </p>
-                        <p className="text-xs text-muted-foreground">
+                        <p className="text-sm text-muted-foreground">
                           {scanResult.direction === "CEX_LOWER"
                             ? "BingX cheaper → buy CEX, sell DEX"
                             : "DEX cheaper → buy DEX, sell CEX"}
@@ -355,13 +355,13 @@ export function Dashboard() {
                     </div>
                     <div className="text-right">
                       <p className="text-sm font-medium">
-                        Net: <span className={scanResult.netProfit > 0 ? "text-success" : "text-destructive"}>
+                        Net: <span className="text-accent">
                           ${scanResult.netProfit.toFixed(4)}
                         </span>
                       </p>
                       <Tooltip>
                         <TooltipTrigger asChild>
-                          <p className="text-xs text-muted-foreground cursor-help">on $1,000 trade</p>
+                          <p className="text-sm text-muted-foreground cursor-help">on $1,000 trade</p>
                         </TooltipTrigger>
                         <TooltipContent>
                           <p>After Base gas (~$0.01) + 30bps slippage</p>
@@ -376,7 +376,7 @@ export function Dashboard() {
                     onClick={handleAnalyze}
                     disabled={analyzeState === "loading" || analyzeState === "success"}
                     variant="secondary"
-                    className="flex-1 h-12 rounded-md"
+                    className="flex-1 h-12 rounded-lg"
                   >
                     {analyzeState === "loading" ? (
                       <>
@@ -393,7 +393,7 @@ export function Dashboard() {
                   <Button
                     onClick={handleAttest}
                     disabled={attestState === "loading" || attestState === "success"}
-                    className="flex-1 h-12 rounded-md"
+                    className="flex-1 h-12 rounded-lg"
                   >
                     {attestState === "loading" ? (
                       <>
@@ -414,7 +414,7 @@ export function Dashboard() {
         </Card>
 
         {(analyzeState === "loading" || analyzeState === "success" || analyzeState === "error") && (
-          <Card>
+          <Card style={{ boxShadow: "var(--glow-soft)" }}>
             <CardHeader>
               <CardTitle className="text-base flex items-center gap-2">
                 <Brain className="h-4 w-4" />
@@ -430,8 +430,8 @@ export function Dashboard() {
                 </div>
               )}
               {analyzeState === "error" && (
-                <div className="rounded-md border border-destructive/30 bg-destructive/5 p-4">
-                  <p className="text-sm text-destructive">{analyzeError}</p>
+                <div className="rounded-lg border border-accent/30 bg-accent/5 p-4">
+                  <p className="text-sm text-accent">{analyzeError}</p>
                   <Button variant="outline" size="sm" className="mt-2" onClick={handleAnalyze}>
                     Retry analysis
                   </Button>
@@ -456,7 +456,7 @@ export function Dashboard() {
         )}
 
         {(attestState === "loading" || attestState === "success" || attestState === "error") && (
-          <Card>
+          <Card style={{ boxShadow: "var(--glow-soft)" }}>
             <CardHeader>
               <CardTitle className="text-base flex items-center gap-2">
                 <Link2 className="h-4 w-4" />
@@ -471,8 +471,8 @@ export function Dashboard() {
                 </div>
               )}
               {attestState === "error" && (
-                <div className="rounded-md border border-destructive/30 bg-destructive/5 p-4">
-                  <p className="text-sm text-destructive">{attestError}</p>
+                <div className="rounded-lg border border-accent/30 bg-accent/5 p-4">
+                  <p className="text-sm text-accent">{attestError}</p>
                   <Button variant="outline" size="sm" className="mt-2" onClick={handleAttest}>
                     Retry attestation
                   </Button>
@@ -490,12 +490,12 @@ export function Dashboard() {
                     href={attestResult.explorerUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1 text-xs text-accent hover:underline"
+                    className="inline-flex items-center gap-1 text-sm text-accent hover:underline"
                   >
                     View on Basescan
                     <ExternalLink className="h-3 w-3" />
                   </a>
-                  <p className="text-xs text-muted-foreground font-mono break-all">
+                  <p className="text-sm text-muted-foreground font-mono break-all">
                     {attestResult.txHash}
                   </p>
                 </div>
@@ -504,7 +504,7 @@ export function Dashboard() {
           </Card>
         )}
 
-        <Card>
+        <Card style={{ boxShadow: "var(--glow-soft)" }}>
           <CardHeader>
             <CardTitle className="text-base">Attestation History</CardTitle>
             <CardDescription>Recorded arbitrage opportunities on Base</CardDescription>
@@ -518,7 +518,7 @@ export function Dashboard() {
               <div className="overflow-x-auto">
                 <table className="w-full text-sm">
                   <thead>
-                    <tr className="border-b border-border text-left text-xs text-muted-foreground">
+                    <tr className="border-b border-border text-left text-sm text-muted-foreground">
                       <th className="pb-2 pr-4 font-medium">Pair</th>
                       <th className="pb-2 pr-4 font-medium">BingX</th>
                       <th className="pb-2 pr-4 font-medium">DEX</th>
@@ -530,25 +530,25 @@ export function Dashboard() {
                   </thead>
                   <tbody>
                     {history.map((record, i) => (
-                      <tr key={i} className="border-b border-border/50">
+                      <tr key={i} className="border-b border-smoke">
                         <td className="py-2 pr-4 font-medium">{record.pair}</td>
                         <td className="py-2 pr-4 tabular-nums">{formatPrice(record.bingxPrice)}</td>
                         <td className="py-2 pr-4 tabular-nums">{formatPrice(record.dexPrice)}</td>
                         <td className="py-2 pr-4 tabular-nums text-accent">{record.gapPercent.toFixed(3)}%</td>
                         <td className="py-2 pr-4 tabular-nums">${record.netProfit.toFixed(4)}</td>
-                        <td className="py-2 pr-4 text-xs text-muted-foreground">{formatTimeAgo(record.timestamp)}</td>
+                        <td className="py-2 pr-4 text-sm text-muted-foreground">{formatTimeAgo(record.timestamp)}</td>
                         <td className="py-2">
                           {record.explorerUrl ? (
                             <a
                               href={record.explorerUrl}
                               target="_blank"
                               rel="noopener noreferrer"
-                              className="inline-flex items-center gap-1 text-xs text-accent hover:underline"
+                              className="inline-flex items-center gap-1 text-sm text-accent hover:underline"
                             >
                               <ExternalLink className="h-3 w-3" />
                             </a>
                           ) : (
-                            <span className="text-xs text-muted-foreground">—</span>
+                            <span className="text-sm text-muted-foreground">—</span>
                           )}
                         </td>
                       </tr>
@@ -560,7 +560,7 @@ export function Dashboard() {
           </CardContent>
         </Card>
 
-        <div className="text-center text-xs text-muted-foreground py-8">
+        <div className="text-center text-sm text-muted-foreground py-8">
           <p>
             Arbiter bridges BingX and Base DEXes in real-time. Powered by Gemini AI.
           </p>
